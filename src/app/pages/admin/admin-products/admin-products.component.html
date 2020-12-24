@@ -1,0 +1,33 @@
+<div class="mb-3">
+  <input type="text" [(ngModel)]="title" name="title" class="form-control mt-4" placeholder="Title hier...">
+</div>
+<div class="mb-3">
+  <textarea class="form-control" [(ngModel)]="text" name="desc" rows="2"></textarea>
+  <input type="email" [(ngModel)]="author" name="author" class="form-control mt-4" placeholder="Author hier...">
+  <button class="btn btn-success mt-2" *ngIf="!isEdit" (click)="addBlog()">Add</button>
+  <button class="btn btn-success mt-2" *ngIf="isEdit" (click)="saveBlog()">Save</button>
+</div>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Text</th>
+      <th scope="col">Dadte</th>
+      <th scope="col">Autor</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let elem of blogs">
+      <th scope="row">{{elem.id}}</th>
+      <td>{{elem.title}}</td>
+      <td>{{elem.text}}</td>
+      <td>{{elem.date}}</td>
+      <td>{{elem.author}}</td>
+      <td><img width="100px" height="70px" [src]="elem.image" alt="pizza"></td>
+      <td><button class="btn btn-warning" (click)="editBlog(elem)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteBlog(elem)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

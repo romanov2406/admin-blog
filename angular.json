@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -120,9 +121,16 @@
               "devServerTarget": "adminBlog:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
   },
-  "defaultProject": "adminBlog"
+  "defaultProject": "adminBlog",
+  "cli": {
+    "analytics": "ed73d2de-192a-4661-91bd-bf306ea16b37"
+  }
 }

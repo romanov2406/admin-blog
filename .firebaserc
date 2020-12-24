@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "webdew-la-piec": {
+      "hosting": {
+        "adminBlog": [
+          "webdew-la-piec"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "blogs": [
+    {
+      "id": 2,
+      "title": "bogdan",
+      "text": "lklkkl",
+      "date": "2020-12-24T03:36:13.857Z",
+      "author": "Piddubnii",
+      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
+    },
+    {
+      "id": 3,
+      "title": "stepan",
+      "text": "l;;l;l;",
+      "date": "2020-12-24T03:23:37.391Z",
+      "author": "Ivanov",
+      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Oleg",
+      "text": "klklklkllk",
+      "date": "2020-12-24T03:23:51.245Z",
+      "author": "Tisakov",
+      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
+    },
+    {
+      "title": "X box",
+      "text": "l;l;;l;l",
+      "date": "2020-12-24T03:24:10.389Z",
+      "author": "Roman Romanov",
+      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg",
+      "id": 5
+    },
+    {
+      "title": "X box",
+      "text": "Some Text",
+      "date": "2020-12-24T03:37:46.773Z",
+      "author": "Romanov Roman",
+      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg",
+      "id": 6
+    }
+  ]
+}

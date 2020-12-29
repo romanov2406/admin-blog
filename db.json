@@ -18,44 +18,60 @@
   },
   "blogs": [
     {
-      "id": 2,
-      "title": "bogdan",
-      "text": "lklkkl",
-      "date": "2020-12-24T03:36:13.857Z",
-      "author": "Piddubnii",
-      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
-    },
-    {
       "id": 3,
-      "title": "stepan",
-      "text": "l;;l;l;",
-      "date": "2020-12-24T03:23:37.391Z",
-      "author": "Ivanov",
+      "title": "Sale",
+      "text": "\nBuy 1 pizza and secound pizza free",
+      "date": "2020-12-29T07:07:37.241Z",
+      "author": "Italico Andriano",
       "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
     },
     {
       "id": 4,
-      "title": "Oleg",
-      "text": "klklklkllk",
-      "date": "2020-12-24T03:23:51.245Z",
-      "author": "Tisakov",
+      "title": "2 drinks in one price",
+      "text": "Only today",
+      "date": "2020-12-29T07:08:12.151Z",
+      "author": "Stepan Petrov",
       "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "name": "піца",
+      "urlName": "pizza",
+      "id": 1
     },
     {
-      "id": 5,
-      "title": "X box",
-      "text": "l;l;;l;l",
-      "date": "2020-12-25T17:08:46.768Z",
-      "author": "Romanov",
-      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg"
+      "name": "напої",
+      "urlName": "drinks",
+      "id": 2
+    }
+  ],
+  "products": [
+    {
+      "name": "Salado",
+      "urlName": "піца",
+      "category": {
+        "name": "піца",
+        "urlName": "pizza",
+        "id": 1
+      },
+      "description": "Titl",
+      "price": "195",
+      "image": "https://www.lapiec-pizza.com.ua/wp-content/uploads/2018/07/LA-P_yets-1.png",
+      "id": 7
     },
     {
-      "title": "sdsdssd",
-      "text": "sdsdsdd",
-      "date": "2020-12-25T17:40:45.848Z",
-      "author": "sdsdsdsdsdsd",
-      "image": "https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg",
-      "id": 6
+      "name": "CocaCola",
+      "urlName": "напої",
+      "category": {
+        "name": "напої",
+        "urlName": "drinks",
+        "id": 2
+      },
+      "description": "Great drinks",
+      "price": "15",
+      "image": "https://www.lapiec-pizza.com.ua/wp-content/uploads/2018/07/LA-P_yets-1.png",
+      "id": 8
     }
   ]
 }

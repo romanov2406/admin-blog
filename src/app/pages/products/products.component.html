@@ -1,1 +1,14 @@
-<p>products works!</p>
+<div class="content"> 
+    <div class="card mt-4" style="width: 18rem;" *ngFor="let elem of pizza">
+      <img [src]="elem.image" class="card-img-top" alt="pizza">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{elem.title | slice: 0: 21}}</h5>
+        <p class="card-text text-center">{{elem.description }}</p>
+        <p class="card-text text-center">{{elem.price}}</p>
+        <div class="cnt d-flex justify-content-center">
+          <a class="btn btn-primary" [routerLink]="['/discount-ditails', elem.id]" routerLinkActive="router-link-active">Details</a>  
+        </div>
+      </div>
+    </div>
+  </div>
+  

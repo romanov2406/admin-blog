@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Blog } from 'src/models/blog.model';
-import { IBlog } from './../../../../interfaces/blog.interface';
-import { BlogsService } from './../../../blogs.service';
+import { Component, TemplateRef, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ICategory } from 'src/interfaces/category.interface';
+import { IProduct } from './../../../../interfaces/product.interface';
+import { ApiService } from './../../../api.service';
+import { Product } from './../../../../models/product.model';
 
 @Component({
   selector: 'app-admin-products',
@@ -9,75 +11,85 @@ import { BlogsService } from './../../../blogs.service';
   styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
-  blogs: Array<IBlog> = [];
-  title: string;
-  text: string;
-  author: string;
-  currentUser: IBlog;
-  currenId: number;
+  id: number;
+  products: Array<IProduct> = [];
+  categories: ICategory[] = [];
+  category: ICategory;
+  name: string;
+  desc: string;
+  price: number;
+  targetImg: File;
+  choose: any;
+  fileToUpload: File = null;
+  img: string = 'https://www.lapiec-pizza.com.ua/wp-content/uploads/2018/07/LA-P_yets-1.png';
+  filter: string;
   isEdit: boolean;
-  image = 'https://www.marcopolo.de/fileadmin/media/Magazin/Reportagen/2018/Pizza-Frau-Shutterstock.jpg'
-  constructor(public blogService: BlogsService) { }
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.getBlogs();
-    this.getServerBlog();
+    this.getStaticCategory();
+    this.getStaticProduct();
   }
-
-  addBlog(): void {
-    let NEW_BLOG = new Blog(this.currenId, this.title, this.text, new Date(), this.author, this.image);
-    delete NEW_BLOG.id
-    this.blogService.postJSONBlog(NEW_BLOG).subscribe(() => {
-      this.getServerBlog()
-    },
-      err => console.log(err));
-    this.formReset();
-  }
-
-  formReset(): void {
-    this.author = '';
-    this.title = '';
-    this.text = '';
-  }
-
-  getBlogs(): void {
-    this.blogs = this.blogService.getStaticBlog()
-  }
-  getServerBlog(): void {
-    this.blogService.getJSONBlog().subscribe(
+  // Category
+  getStaticCategory(): void {
+    this.apiService.getJSONCat().subscribe(
       data => {
-        this.blogs = data
+        this.categories = data;
       },
       err => console.log(err)
     )
   }
-  deleteBlog(blog: IBlog): void {
-    this.blogService.deleteJSONBlog(blog.id).subscribe(
-      () => {
-        this.getServerBlog()
-      },
-      err => console.log(err)
+  // getImg(event):void{
+  //   this.targetImg = event.target.files;
+  //   console.log(this.targetImg);
+  // }
 
+  // Products
+  getStaticProduct(): void {
+    this.apiService.getJSONProd().subscribe(
+      data => {
+        this.products = data
+      }
     )
   }
-  
-  editBlog(blog: IBlog): void {
-    this.currenId = blog.id
-    this.text = blog.text;
-    this.title = blog.title;
-    this.author = blog.author;
+  addProduct(): void {
+    if (this.name && this.category.name && this.category && this.desc && this.price && this.img && this.id) {
+      const NEW_PROD = new Product(this.name, this.category.name, this.category, this.desc, this.price, this.img, this.id);
+      delete NEW_PROD.id
+      this.apiService.postJSONProd(NEW_PROD).subscribe(
+        () => {
+          this.getStaticProduct();
+        }
+      )
+    } else {
+      alert('Заповніть всі поля')
+    }
+  }
+  deleteProduct(id: number): void {
+    this.apiService.deleteJSONProd(id).subscribe(
+      () => this.getStaticProduct()
+    )
+  }
+  updateProduct(): void {
+    const NEW_PROD = new Product(this.name, this.category.name, this.category, this.desc, this.price, this.img, this.id);
+    this.apiService.updateJSONProd(NEW_PROD).subscribe(
+      () => {
+        this.getStaticProduct();
+        this.isEdit = false;
+      }
+    )
+  }
+  editProduct(elem: IProduct): void {
+    this.id = elem.id;
+    this.img = elem.image;
+    this.category = elem.category;
+    this.name = elem.name;
+    this.desc = elem.description;
+    this.price = elem.price;
     this.isEdit = true;
   }
-
-  saveBlog(): void {
-    let NEW_BLOG = new Blog(this.currenId, this.title, this.text, new Date(), this.author, this.image);
-    this.blogService.updateJSONBlog(NEW_BLOG).subscribe(
-      () => {
-        this.getServerBlog()
-      },
-      err => console.log(err)
-    )
-    this.isEdit = false;
-    this.formReset();
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }

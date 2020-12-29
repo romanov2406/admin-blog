@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './../../api.service';
+import { IProduct } from './../../../interfaces/product.interface';
 
 @Component({
   selector: 'app-products',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-
-  constructor() { }
+  pizza:IProduct[] = [];
+  constructor(private apiService:ApiService) { }
 
   ngOnInit(): void {
+    this.getStaticProduct();
   }
 
+  getStaticProduct():void{
+    this.apiService.getCategoryProduct('pizza').subscribe(
+      data => {
+        this.pizza = data;
+      }
+    )
+  }
 }

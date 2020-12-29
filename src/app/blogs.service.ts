@@ -36,4 +36,7 @@ export class BlogsService {
   updateJSONBlog(blog:IBlog):Observable<IBlog>{
    return this.http.put<IBlog>(`${this.url}/${blog.id}`,blog);
   }
+  getJSONOneProduct(id:number):Observable<IBlog>{
+    return this.http.get<IBlog>(`${this.url}/${id}`);
+  }
 }

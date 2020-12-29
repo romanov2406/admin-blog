@@ -1,33 +1,59 @@
-<div class="mb-3">
-  <input type="text" [(ngModel)]="title" name="title" class="form-control mt-4" placeholder="Title hier...">
-</div>
-<div class="mb-3">
-  <textarea class="form-control" [(ngModel)]="text" name="desc" rows="2"></textarea>
-  <input type="email" [(ngModel)]="author" name="author" class="form-control mt-4" placeholder="Author hier...">
-  <button class="btn btn-success mt-2" *ngIf="!isEdit" (click)="addBlog()">Add</button>
-  <button class="btn btn-success mt-2" *ngIf="isEdit" (click)="saveBlog()">Save</button>
-</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <select class="form-select" [(ngModel)]="category" name="category">
+        <option value="1" [ngValue]="elem" *ngFor="let elem of categories">{{elem.name}}</option>
+      </select>
+      <input type="text" [(ngModel)]="name" class="form-control mt-4" placeholder="Name">
+      <textarea class="form-control mt-4" [(ngModel)]="desc" name="desc" placeholder="Leave a comment here"></textarea>
+      <input type="text" [(ngModel)]="price" name="price" class="form-control mt-4" placeholder="Price">
+      <div class="custom-file mt-4">
+
+        <input type="file" class="custom-file-input">
+
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-success mt-2" *ngIf="!isEdit" (click)="addProduct()" (click)="modalRef.hide()">Create
+        Category</button>
+      <button class="btn btn-success mt-2" *ngIf="isEdit" (click)="updateProduct()" (click)="modalRef.hide()">Save</button>
+    </div>
+  </div>
+</ng-template>
+<button type="button" class="btn btn-primary mt-4" (click)="openModal(template)">Add Product</button>
+<input type="email" [(ngModel)]="filter" name="filter" class="form-control mt-4" placeholder="Filter">
 <table class="table mt-3">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Title</th>
-      <th scope="col">Text</th>
-      <th scope="col">Dadte</th>
-      <th scope="col">Autor</th>
-      <th scope="col">Image</th>
+      <th scope="col">#</th>
+      <th scope="col">Category</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">price</th>
+      <th scope="col">image</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let elem of blogs">
-      <th scope="row">{{elem.id}}</th>
-      <td>{{elem.title}}</td>
-      <td>{{elem.text}}</td>
-      <td>{{elem.date}}</td>
-      <td>{{elem.author}}</td>
-      <td><img width="100px" height="70px" [src]="elem.image" alt="pizza"></td>
-      <td><button class="btn btn-warning" (click)="editBlog(elem)">Edit</button></td>
-      <td><button class="btn btn-danger" (click)="deleteBlog(elem)">Delete</button></td>
+    <tr *ngFor="let elem of products| search: filter;index as i">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{elem.urlName}}</td>
+      <td>{{elem.name}}</td>
+      <td>{{elem.description}}</td>
+      <td>{{elem.price}}</td>
+      <td>
+        <img [src]="elem.image" style="width: 100px;" alt="">
+      </td>
+      <td><button class="btn btn-warning" (click)="editProduct(elem)" (click)="openModal(template)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteProduct(elem.id)">Delete</button></td>
     </tr>
   </tbody>
 </table>

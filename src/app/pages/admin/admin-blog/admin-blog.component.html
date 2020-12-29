@@ -1,0 +1,50 @@
+<button type="button" class="btn btn-primary mt-4" (click)="openModal(template)">add Blog</button>
+ 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <input type="text" [(ngModel)]="title" name="title" class="form-control mt-4" placeholder="Title hier...">
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" [(ngModel)]="text" name="desc" rows="2"></textarea>
+      <input type="email" [(ngModel)]="author" name="author" class="form-control mt-4" placeholder="Author hier...">
+      <button class="btn btn-success mt-2" *ngIf="!isEdit" (click)="addBlog()">Add</button>
+      <button class="btn btn-success mt-2" *ngIf="isEdit" (click)="modalRef.hide()" (click)="saveBlog()">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Text</th>
+      <th scope="col">Dadte</th>
+      <th scope="col">Autor</th>
+      <th scope="col">Image</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let elem of blogs">
+      <th scope="row">{{elem.id}}</th>
+      <td>{{elem.title}}</td>
+      <td>{{elem.text | slice: 0: 50}}...</td>
+      <td>{{elem.date | date}}</td>
+      <td>{{elem.author}}</td>
+      <td><img width="100px" height="70px" [src]="elem.image" alt="pizza"></td>
+      <td><button class="btn btn-warning" (click)="openModal(template)" (click)="editBlog(elem)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteBlog(elem)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

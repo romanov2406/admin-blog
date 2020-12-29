@@ -1,0 +1,41 @@
+ <ng-template #template>
+   <div class="modal-header">
+     <h4 class="modal-title pull-left">Modal</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <div class="mb-3">
+       <input type="text" [(ngModel)]="name" name="name" class="form-control mt-4" placeholder="CategoryName">
+       <input type="text" [(ngModel)]="urlName" name="urlName" class="form-control mt-4" placeholder="UrlName">
+     </div>
+     <div class="mb-3">
+       <button class="btn btn-success mt-2" *ngIf="!isEdit" (click)="modalRef.hide()" (click)="addCat()">Create Category</button>
+       <button class="btn btn-success mt-2" *ngIf="isEdit" (click)="modalRef.hide()" (click)="saveCat()">Save</button>
+     </div>
+   </div>
+ </ng-template>
+
+
+ <button type="button" class="btn btn-primary mt-4" (click)="openModal(template)">Add Category</button>
+
+ <input type="email" [(ngModel)]="filter" name="filter" class="form-control mt-4" placeholder="Filter">
+ <table class="table mt-3">
+   <thead>
+     <tr>
+       <th scope="col">#</th>
+       <th scope="col">Name</th>
+       <th scope="col">Edit</th>
+       <th scope="col">Delete</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let elem of categories |search: filter; index as i">
+       <th scope="row">{{i + 1}}</th>
+       <td>{{elem.name}}</td>
+       <td><button class="btn btn-warning" (click)="openModal(template)" (click)="editCategory(elem)">Edit</button></td>
+       <td><button class="btn btn-danger" (click)="deleteCategory(elem.id)">Delete</button></td>
+     </tr>
+   </tbody>
+ </table>
